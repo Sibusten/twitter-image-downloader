@@ -8,6 +8,8 @@
 // @grant       none
 // ==/UserScript==
 
+this.$ = this.jQuery = jQuery.noConflict(true);
+
 var current_gallery_image_url = '';
 var currently_working = false;
 
@@ -19,8 +21,6 @@ function get_gallery_image_url(){
 update_current_gallery_image_url = function(){
   // Get the new image url
   current_gallery_image_url = get_gallery_image_url()
-  
-  console.log('update_image');
   
   // Update the download button
   update_download_button();
@@ -34,16 +34,14 @@ function update_download_button(){
   }
   currently_working = true;
   
-  console.log('update_button');
-  
   // If the gallery download button does not exist, create it.
   if(!$('#gallery-download').length){
     $('.GalleryTweet .tweet .content .stream-item-header .time').after('<a href="' + current_gallery_image_url + '" target="_blank"><input type="button" id="gallery-download" value="Download"></input></a>');
   }
   
   // If the download button is not pointing to the current image, update it's url
-  if(!$('gallery-download').attr('href') == current_gallery_image_url){
-    $('gallery-download').attr('href', current_gallery_image_url);
+  if(!$('#gallery-download').attr('href') == current_gallery_image_url){
+    $('#gallery-download').attr('href', current_gallery_image_url);
   }
   
   currently_working = false;
