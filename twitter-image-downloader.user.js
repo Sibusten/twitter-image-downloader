@@ -4,7 +4,7 @@
 // @description Adds a button to download images from twitter
 // @include     https://twitter.com/*
 // @require     https://code.jquery.com/jquery-3.2.1.min.js
-// @version     1.1
+// @version     1.2
 // @grant       none
 // ==/UserScript==
 
