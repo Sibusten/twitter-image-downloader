@@ -4,14 +4,15 @@
 // @description Adds a button to download images from twitter
 // @include     https://twitter.com/*
 // @require     https://code.jquery.com/jquery-3.2.1.min.js
-// @version     1
+// @version     1.1
 // @grant       none
 // ==/UserScript==
 
-current_gallery_image_url = '';
+var current_gallery_image_url = '';
+var currently_working = false;
 
 // Get the url of the currently shown gallery image
-get_gallery_image_url = function(){
+function get_gallery_image_url(){
   return $('.Gallery-media .media-image').attr('src');
 };
 
@@ -19,12 +20,22 @@ update_current_gallery_image_url = function(){
   // Get the new image url
   current_gallery_image_url = get_gallery_image_url()
   
+  console.log('update_image');
+  
   // Update the download button
   update_download_button();
 };
 
 // Add a download button to the gallery tweet if it does not already exist
-update_download_button = function(){
+function update_download_button(){
+  // Set a flag so that changes made to the element don't cause the event to trigger itself
+  if(currently_working){
+    return;
+  }
+  currently_working = true;
+  
+  console.log('update_button');
+  
   // If the gallery download button does not exist, create it.
   if(!$('#gallery-download').length){
     $('.GalleryTweet .tweet .content .stream-item-header .time').after('<a href="' + current_gallery_image_url + '" target="_blank"><input type="button" id="gallery-download" value="Download"></input></a>');
@@ -34,6 +45,8 @@ update_download_button = function(){
   if(!$('gallery-download').attr('href') == current_gallery_image_url){
     $('gallery-download').attr('href', current_gallery_image_url);
   }
+  
+  currently_working = false;
 };
 
 $(document).ready(function(){
