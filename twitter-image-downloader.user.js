@@ -4,7 +4,7 @@
 // @description Adds a button to download images from twitter
 // @include     https://twitter.com/*
 // @require     https://code.jquery.com/jquery-3.2.1.min.js
-// @version     1.2
+// @version     1.3
 // @grant       none
 // ==/UserScript==
 
@@ -36,7 +36,7 @@ function update_download_button(){
   
   // If the gallery download button does not exist, create it.
   if(!$('#gallery-download').length){
-    $('.GalleryTweet .tweet .content .stream-item-header .time').after('<a href="' + current_gallery_image_url + '" target="_blank"><input type="button" id="gallery-download" value="Download"></input></a>');
+    $('.GalleryTweet .tweet .content .stream-item-header .time').after('<a href="' + current_gallery_image_url + '" target="_blank"><span id="gallery-download">Download</span></a>');
   }
   
   // If the download button is not pointing to the current image, update it's url
