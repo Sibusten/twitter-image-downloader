@@ -4,7 +4,7 @@
 // @description Adds a button to download images from twitter
 // @include     https://twitter.com/*
 // @require     https://code.jquery.com/jquery-3.2.1.min.js
-// @version     1.3
+// @version     1.4
 // @grant       none
 // ==/UserScript==
 
@@ -15,7 +15,10 @@ var currently_working = false;
 
 // Get the url of the currently shown gallery image
 function get_gallery_image_url(){
-  return $('.Gallery-media .media-image').attr('src');
+  var raw_image_url = $('.Gallery-media .media-image').attr('src');
+
+  // Make sure the image is the origial version, not large or smaller
+  return raw_image_url.substring(0, raw_image_url.lastIndexOf(':')) + ':orig';
 };
 
 update_current_gallery_image_url = function(){
